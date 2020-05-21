@@ -13,13 +13,15 @@ namespace EntityCF.Controllers
       private DAL.IDbService _dbService;
       public CodeFirstController(DAL.IDbService dbService)
         {
+            
             _dbService = dbService;
         }
 
     [HttpGet("{Id}")]
     public IActionResult GetDoctor(int id) 
         {
-
+            //metoda seedująca
+            //new Seeds().seedMeSenpai();
             return _dbService.GetDoctor( id);
         }
     [HttpDelete("{Id}")]
@@ -34,7 +36,7 @@ namespace EntityCF.Controllers
 
             return _dbService.AddDoctor(doc);
         }
-    [HttpPost]
+    [HttpPut]
     public IActionResult ModifyDoctor(Models.Doctor doc)
         {
 
@@ -44,5 +46,4 @@ namespace EntityCF.Controllers
     }
     
 
-}
 }

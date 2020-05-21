@@ -15,6 +15,14 @@ namespace EntityCF.Models
 		public CFContext(DbContextOptions<CFContext> options) : base(options) { }
 
 		public virtual DbSet<Doctor> Doctor { get; set; }
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			if (!optionsBuilder.IsConfigured)
+			{
+
+				optionsBuilder.UseSqlServer("Data Source=db-mssql;Initial Catalog=s19278;Integrated Security=True;");
+			}
+		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 
@@ -61,10 +69,7 @@ namespace EntityCF.Models
 
 				entity.Property(e => e.Dose);
 				entity.Property(e => e.Details).HasMaxLength(100);
-
-				entity.HasOne(e => e.medicament).WithMany(e => e.Prescription_Medicaments).HasForeignKey(e => e.IdMedicament).OnDelete(DeleteBehavior.ClientSetNull);
-				entity.HasOne(e => e.prescription).WithMany(e => e.Prescription_Medicaments).HasForeignKey(e => e.IdPrescription).OnDelete(DeleteBehavior.ClientSetNull);
-
+				entity.HasNoKey();
 
 			});
 

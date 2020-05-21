@@ -35,6 +35,7 @@ namespace EntityCF
 			});
 			services.AddScoped<DAL.IDbService, DAL.CodeFirstDB>();
 			services.AddControllers();
+			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,8 +50,8 @@ namespace EntityCF
 
 			app.UseRouting();
 
-			app.UseAuthorization();
-
+			
+			
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
